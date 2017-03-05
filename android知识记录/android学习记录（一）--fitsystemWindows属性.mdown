@@ -1,0 +1,35 @@
+#android学习记录（一） --- --- fitsystemWindows属性
+
+>技术不好不是你的错，不坚持学习就是你的错！
+
+##前言
+&emsp;&emsp;system windows 指的是屏幕上status bar、navigation bar等系统空间所占据的部分。绝大多数情况下，不需要理会status bar或者navigation bar下面的空间，只是需要注意不能让自己需要的交互控件藏在status bar或者navigation bar的下面。而Android的fitSystemWindows的这个属性，解决了这个属性。
+
+参考链接：[我们为什么要用fitsSystemWindows?](https://github.com/hehonghui/android-tech-frontier/blob/master/issue-35/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BB%AC%E8%A6%81%E7%94%A8fitsSystemWindows.md)
+##fitSystemWindows属性
+&emsp;&emsp;fitSystemWindows属性是在Android4.4中被引入的，这个属性的作用就是通过设置View的padding，使得应用的content部分（Activity中setContentView()中传入的就是content）不会与system window重叠。
+
+使用该属性需要注意以下几点：
+
+1. fitSystemWindows这个属性需要设置给**根View**,因为只有根VIEW外面才是SystemWindows,所以只有设置在根VIEW上才有效。
+2. 如果设置了该属性后，那么再设置别的padding的值不会生效。
+3. Insets**始终相对于全屏幕**——Insets即**边框**，它决定着整个Window的边界。对Insets设置padding的时候，这个padding始终是相对于全屏幕的。因为Insets的生成在View layout之前就已经完成了，所以系统对于View长什么样一无所知。
+
+##自定义fitSystemWindows
+&emsp;&emsp;在KITKAT及以下的版本，你的自定义View能够通过覆盖fitsSystemWindows() : boolean函数，来增加自定义行为。如果返回true，意味着你已经占据了整个Insets，如果返回false，意味着给其他的View依旧留有机会。
+
+&emsp;&emsp;在Lollipop以及更高的版本，我们提供了一些新的API，使得自定义这个行为更加的方便。与之前的版本不同，现在你只需要覆盖OnApplyWindowInsets()方法，该方法允许View消耗它想消耗的任意空间（Insets），同时也能够为子方法，调用dispatchApplyWindowInsets()。
+&emsp;&emsp;更妙的是，利用新的API，你甚至不需要拓展View类，你可以使用ViewCompat.setOnApplyWindowInsetsListener()，这个方法优先于View.onApplyWindowInsets()调用。ViewCompat同时也提供了onApplyWindowInsets（）和dispatchApplyWindowInset()的兼容版本，无需冗长的版本判断。
+###自定义fitSystemWindows例子
+&emsp;&emsp;绝大多数基本的layouts（FrameLayout）都是使用默认的行为，然而依然有一部分layouts已经使用了自定义fitsSystemWindow来实现自定义的功能。
+
+navigation drawer就是一个例子，它需要充满整个屏幕，绘制在透明的status bar下面。
+
+>插入图片
+
+&emsp;&emsp;如上图所示，DrawerLayout使用了fitsSystemwindows，他需要让它的子View依旧保持默认行为，即不被actionbar或其他system window遮住，同时依照Material Design的定义，又需要在透明的statusbar下面进行绘制（默认是你在theme中设置的colorPrimaryDark颜色）。你会注意到，在Lollipop及以上版本，DrawerLayout为每一个子View调用了dispatchApplyWindowInsets()，使每一个子View都收到fitsSystemWindows。这与默认行为完全不同，默认行为会使得根View消耗所有的insets，同时子View们永远不会收到fitsSystemWindows。
+
+&emsp;&emsp;CoordinatorLayout也利用了这一特性，使得其子View有机会截断并对fitsSystemWindows做出自己的反应。同时，它也利用fitsSystemWindows这一flag看其是否需要在statusbar的下方绘制。
+
+&emsp;&emsp;同样的，CollapsingToolbarLayout以fitsSystemWindows什么时候把变小的View放在什么地方。
+

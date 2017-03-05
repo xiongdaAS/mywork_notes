@@ -1,0 +1,38 @@
+#开源项目搭建自己的技术堆栈
+
+-------
+##json解析能力————fastjson.android
+&emsp;&emsp;Android平台定制的最快的json库，用于缓存序列化、协议交互、web输出、Android客户端等多种应用场景。[fastjson.android地址](https://github.com/alibaba/fastjson/wiki/Android%E7%89%88%E6%9C%AC)。
+&emsp;&emsp;在gradle中加入：
+
+> compile 'com.alibaba:fastjson:VERSION_CODE'
+
+用真实发行版本号, 替换 VERSION_CODE , 例如 1.1.54.android，真实发行版本通过链接可以查询。
+
+-------
+##数据库操作能力————greenDao
+&emsp;&emsp;greenDao是一个轻量级且快速的ORM框架，专门为Android高度优化和定制，它能够支持每秒数千条记录的CRUD操作。官网地址：[greenDao](http://greenrobot.org/greendao/)
+demo地址：[greenDao demo](https://github.com/anye0803/GreenDao)
+
+-------
+##网络通信能力————Volley
+&emsp;&emsp;Volley是Google在Google I/O 2013上面发布的用于Android平台网络通信库，能使网络通信更快、更简单、更健壮，特别适用于数据量小等通信频繁的场景。
+###使用
+1. 直接以jar包的形式引入
+2. gradle中使用compile线引入，可以考虑使用mcxiaoke在github上面的volley mirror,[地址](https://github.com/mcxiaoke/android-volley) 。在build.gradle中使用如下语句：
+
+> compile 'com.mcxiaoke.volley:library:1.0.19'
+
+-------
+##图片缓存和显示能力
+###Glide
+&emsp;&emsp;Glide是Google推荐的用于Android平台上的图片加载和缓存的函数库。这个库被广泛应用在Google的开源项目中，glide为包含图片的滚动列表做了尽可能流畅的优化，除了静态图片glide也支持GIF格式图片的显示。[glide地址](https://github.com/bumptech/glide) 。
+###Fresco
+&emsp;&emsp;Fresco是facebook开源的功能强大的图片加载和缓存函数库，相比其他图片缓存库，[Fresco地址](https://github.com/facebook/fresco) 。Fresco最显著的特点是具有三级缓存：两级内存缓存和一级磁盘缓存。它的主要特点如下：
+- 渐进式的加载JPEG图片
+- 显示GIF和webp动画
+- 可扩展，可自定义的图片加载和显示
+- 在Android 4.X和以下的系统上，将图片放在Android内存一个特殊的区域，从而使得应用运行更流畅，同时基带见底出现内存泄漏错误。
+
+&emsp;&emsp;对于**严重依赖图片缓存**的APP，例如壁纸类、图片社交类的APP来说，可以选择最专业的Fresco；对于一般的应用选择glide就可以。
+

@@ -1,0 +1,117 @@
+# Markdown语法
+##标题
+用行首插入的1到6个#分别表示1到6级标题
+##段落
+Markdown中用空白行来分割段落
+##字体
+默认颜色：Default Color
+<font color='red'>Red Color</font>
+<font color='blue'>Blue Color</font>
+<font color='green'>Green Color</font>
+<font color='yellow'>Yellow Color</font>
+<font color='pink'>Pink Color</font>
+<font color='purple'>Purple Color</font>
+<font color='orange'>Orange Color</font>
+
+示例：
+```
+默认颜色：Default Color
+<font color='red'>Red Color</font>
+<font color='blue'>Blue Color</font>
+<font color='green'>Green Color</font>
+<font color='yellow'>Yellow Color</font>
+<font color='pink'>Pink Color</font>
+<font color='purple'>Purple Color</font>
+<font color='orange'>Orange Color</font>
+```
+##分割线
+
+在一行中用三个以上的星号、减号、底线来建立一个分割线，行内不能有其他东西。注：分割线距离上一个文本需要空一行。
+
+---
+
+示例：
+```
+---
+```
+##列表
+Markdown 支持有序列表和无序列表。
+###无序列表
+使用星号、加号或是减号作为列表标记。
+- 你好
+- 我好
+- 非常好
+
+示例：
+```
+- 你好
+- 我好
+- 非常好
+```
+###缩进
+```
+采用&emsp;缩进一个字符
+```
+###有序列表
+使用数字接着一个英文句点。
+
+1. 你好
+2. 我好
+3. 大家好
+
+示例：
+```
+1. 你好
+2. 我好
+3. 大家好
+```
+##链接
+markdown支持的链接语法如： [链接文字]（链接地址） 。
+[正则表达式简介及在C++11中的简单使用](http://blog.csdn.net/fengbingchun/article/details/54835571)
+示例：
+```
+[正则表达式简介及在C++11中的简单使用](http://blog.csdn.net/fengbingchun/article/details/54835571)
+```
+##图片
+markdown支持的图片语法如： ！[链接文字]（图片链接地址）
+![我](http://user.qzone.qq.com/540886047/4)
+示例：
+```
+![我](http://user.qzone.qq.com/540886047/4)
+```
+##引用
+在markdown中，只需要在引用的文字前加上符号：> 就可以了。注：在符号：> 和文本之间要保留一个字符的空格。
+示例：
+```
+> 这是一个引用
+```
+##粗体和斜体
+用两个 * 号包含一段文本就是粗体的语法，用一个 * 号包含一段文本就是斜体的语法。
+示例：
+```
+ *斜体* ，**粗体**
+```
+##代码引用
+需要引用代码时，如果引用的语句只有一段，不分行，直接用 `号将代码包起来.
+示例：
+```
+`hello world`
+```
+如果有多行代码时，可以将 ``` 至于代码的首行和尾行。如：
+```
+String s = "hello world";
+System.out.println(s);
+```
+##表格
+
+a | b | c 
+--|---|---
+1 |2  | 2 
+
+示例：
+```
+a | b | c 
+--|---|---
+1 |2  | 2 
+```
+
